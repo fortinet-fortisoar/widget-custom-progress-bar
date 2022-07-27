@@ -22,7 +22,6 @@
         }, config);
 
         function init() {
-          console.log("Edit Page: ", $scope.page);
             // Loads modules present in system
             appModulesService.load(true).then(function (modules) {
                 if ($scope.page !== 'dashboard' && $scope.page !== 'reporting') {

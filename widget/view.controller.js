@@ -92,7 +92,6 @@
         }
 
         function init() {
-            console.log("Page : ", $scope.page);
             for (let j = 1; j <= 4; j++) {
                 let y = {
                     'classDetail': 'foam top-glass-foam-' + j + ' foam-' + $scope.currentTheme
