@@ -1,0 +1,111 @@
+<form data-ng-submit="save()" class="noMargin" name="editHappinessQuotientForm"
+    data-ng-class="{'state-wait': processing }" novalidate>
+    <div class="modal-header">
+        <h3 class="modal-title col-md-9">Edit Happiness Quotient</h3>
+        <button type="button" class="close" data-ng-click="cancel()" data-dismiss="modal" aria-label="Close"
+            id="close-edit-widget-form-btn">
+            <div aria-hidden="true" class="version-button">+</div>
+        </button>
+    </div>
+    <div class="modal-body">
+        <!-- Input field to set title for widget -->
+        <div class="form-group"
+            data-ng-class="{ 'has-error': editHappinessQuotientForm.title.$invalid && editHappinessQuotientForm.title.$touched }">
+            <label for="hqTitle" class="control-label">Title<span class="text-danger">*</span></label>
+            <input id="hqTitle" name="title" type="text" data-ng-model="config.title" class="form-control" required />
+            <div data-cs-messages="editHappinessQuotientForm.title"></div>
+        </div>
+        <!-- Displays list of Modules -->
+        <div class="form-group"
+            data-ng-class="{ 'has-error': editHappinessQuotientForm.resource.$invalid && editHappinessQuotientForm.resource.$touched }">
+            <label for="hqResource" class="control-label">Data Source<span class="text-danger">*</span></label>
+            <!-- Give options of modules in dashboard -->
+            <select id="hqResource" name="resource" class="form-control padding-bottom-20"
+                data-ng-options="module.type as module.name for module in modules" data-ng-model="config.module"
+                data-ng-if="page === 'dashboard' || page === 'reporting'" data-ng-change="loadAttributes()" required>
+                <option value="">Select an option</option>
+            </select>
+            <!-- By default select module of that View Panel -->
+            <select id="hqResource" name="resource" class="form-control" data-ng-model="config.module"
+                data-ng-if="page !== 'dashboard' && page !== 'reporting'"
+                data-ng-options="module.type as module.name for module in modules">
+            </select>
+            <div data-cs-messages="editHappinessQuotientForm.module"></div>
+        </div>
+        <!-- Display integer/number input field for view panel -->
+        <div class="form-group"
+            data-ng-class="{ 'has-error': editHappinessQuotientForm.inputResource.$invalid && editHappinessQuotientForm.inputResource.$touched}"
+            data-ng-if="config.inputFields.length > 0 && (page !== 'dashboard' && page !== 'reporting')">
+            <label for="hqInputResource" class="control-label">Input Field<span class="text-danger">*</span></label>
+            <select id="hqInputResource" name="inputResource" class="form-control"
+                data-ng-options="inputField.name as inputField.title for inputField in config.inputFields | orderBy : 'title'"
+                data-ng-model="config.selectInput" data-ng-change="setMinMaxOfIntegerField()" required>
+                <option value="">Select an option</option>
+            </select>
+            <div data-cs-messages="editHappinessQuotientForm.inputField"></div>
+        </div>
+        <!-- Message if no input fields are available -->
+        <div class="custom-alert custom-alert-danger margin-bottom-xlg margin-top-md"
+            data-ng-if="config.inputFields.length === 0 && (page !== 'dashboard' || page !== 'reporting')">
+            <span
+                class="glyphicon glyphicon-exclamation-sign error-icon font-size-20 info-icon margin-top-negative-2 padding-left-sm margin-right-lg"></span>
+            <span>No field by type number found in {{ modules[0].name }}</span>
+        </div>
+        <!-- Min/Max field for input -->
+        <div
+            data-ng-if="config.selectInput !== undefined && config.inputFields.length > 0 && (page !== 'dashboard' || page !== 'reporting')">
+            <div class="col-sm-6 padding-left-0">
+                <div class="form-group"
+                    data-ng-class="{ 'has-error': editHappinessQuotientForm.minValue.$invalid && editHappinessQuotientForm.minValue.$touched }">
+                    <label for="hqMin" class="control-label">Min<span class="text-danger">*</span></label>
+                    <input id="hqMin" name="minValue" type="number" min="0" class="form-control"
+                        data-ng-model="config.minLength" required />
+                    <div data-cs-messages="editHappinessQuotientForm.minValue"></div>
+                </div>
+            </div>
+            <div class="col-sm-6 padding-right-0">
+                <div class="form-group"
+                    data-ng-class="{ 'has-error': editHappinessQuotientForm.maxValue.$invalid && editHappinessQuotientForm.maxValue.$touched }">
+                    <label for="hqMax" class="control-label">Max<span class="text-danger">*</span></label>
+                    <input id="hqMax" name="maxValue" type="number" min="0" class="form-control"
+                        data-ng-model="config.maxLength" required />
+                    <div data-cs-messages="editHappinessQuotientForm.maxValue"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Filters for Dashboard get total count -->
+        <div class="form-group padding-top-md"
+            data-ng-class="{ 'has-error': editHappinessQuotientForm.filters.$invalid && editHappinessQuotientForm.filters.$touched }"
+            data-ng-if="(page === 'dashboard' || page === 'reporting') && config.module !== undefined">
+            <label class="control-label">Filter Criteria - Total Number Of Records <span
+                    class="text-danger">*</span><br />
+                <small><em class="muted">Criteria that defines the total number of records, example, Total Critical
+                        Alerts in Last Week</em></small></label>
+            <!-- Show condition fields to and as a filters for this widget -->
+            <div id="hqTotalFilter" data-cs-conditional data-parent-form="editHappinessQuotientForm"
+                data-fields="config.fields" data-ng-model="config.totalCountQuery"
+                data-form-name="'editHappinessQuotientForm'" data-reset-field="config.fields"></div>
+            <div data-cs-messages="editHappinessQuotientForm.filters"></div>
+            <hr />
+        </div>
+        <!-- Filter to get progress count -->
+        <div class="form-group padding-top-md"
+            data-ng-class="{ 'has-error': editHappinessQuotientForm.filters.$invalid && editHappinessQuotientForm.filters.$touched }"
+            data-ng-if="(page === 'dashboard' || page === 'reporting') && config.module !== undefined">
+            <label class="control-label">Filter Criteria - Progress Record Set <span class="text-danger">*</span><br />
+                <small><em class="muted">With the total records defined above, only add the criteria that defines the
+                        subset of records (within the total records) that indicate progress</em></small> </label>
+            <!-- Show conditions fields to add as a filters for this widget -->
+            <div id="hqProgressFilter" data-cs-conditional data-parent-form="editHappinessQuotientForm"
+                data-fields="config.fields" data-ng-model="config.progressCountQuery"
+                data-form-name="'editHappinessQuotientForm'" data-reset-field="config.fields"></div>
+            <div data-cs-messages="editHappinessQuotientForm.filters"></div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button id="edit-widget-save" type="submit" class="btn btn-sm btn-primary"><i
+                class="icon icon-check margin-right-sm"></i>Save</button>
+        <button id="edit-widget-cancel" type="button" class="btn btn-sm btn-default" data-ng-click="cancel()"><i
+                class="icon icon-close margin-right-sm"></i>Close</button>
+    </div>
+</form>

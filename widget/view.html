@@ -1,0 +1,46 @@
+<div class="widget widget-container chart ">
+    <div class="display-flex-space-between margin-chart">
+        <div class="padding-right-0 padding-left-0 widget-dashboard-title-width"
+            data-ng-class="(page === 'dashboard' || page === 'reporting') ? 'widget-dashboard-title-width' : 'widget-title-width'">
+            <h5 class="margin-top-0 margin-bottom-0 text-overflow ng-binding">{{ config.title }}</h5>
+        </div>
+        <div class="padding-right-0 padding-left-0"
+            data-ng-class="(page === 'dashboard' || page === 'reporting') ? 'widget-dashboard-actions-width' : 'widget-actions-width'">
+            <span class="fa btn widget-action-icon btn-sm pull-right" data-ng-click="collapsed = !collapsed"
+                data-ng-class="{'fa-caret-up': !collapsed, 'fa-caret-down': collapsed}"></span>
+        </div>
+    </div>
+    <div class="padding-left-lg padding-bottom-lg">
+        <div data-ng-hide="collapsed">
+            <!-- Creates mug -->
+            <div id="mug" class="mug mug-{{ currentTheme }}"
+                data-ng-if="config.selectInput || (page === 'dashboard' || page === 'reporting')">
+                <!-- Shows mug filled percentage -->
+                <h1 class="juicePercentage">{{ progress }}%
+                </h1>
+                <!-- Juice fills with bubble animation -->
+                <div id="{{ juiceId }}" class="juice display-block" data-ng-class="{'display-none' : progress === 0}">
+                    <div data-ng-repeat="bubble in bubbles" data-ng-style="{{ bubble.style }}" class="{{ bubble.name }}"
+                        data-ng-class="{'display-none' : progress === 0}">
+                    </div>
+                </div>
+                <!-- Foam with animation for juice -->
+                <div data-ng-repeat="foam in foams" class="{{ foam.classDetail }}"
+                    data-ng-class="{'display-none' : progress !== 100}">
+                </div>
+                <div class="foam side-glass-foam-1 foam-{{ currentTheme }}"
+                    data-ng-class="{'display-none' : progress !== 100}">
+                </div>
+                <div class="foam side-glass-foam-2 foam-{{ currentTheme }}"
+                    data-ng-class="{'display-none' : progress !== 100}">
+                </div>
+            </div>
+            <div class="happiness-error-message"
+                data-ng-if="config.selectInput === undefined && (page !== 'dashboard' && page !== 'reporting')">
+                <h6 class="text-center padding-top-md padding-bottom-md font200 font-size-15">
+                    This widget is not properly configured.
+                </h6>
+            </div>
+        </div>
+    </div>
+</div>
