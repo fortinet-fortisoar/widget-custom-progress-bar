@@ -77,7 +77,7 @@
                     $scope.config.fields = entity.getFormFields();
                 });
             }
-        };
+        }
 
         function setMinMaxForIntegerField() {
             // Iterates over inputFields variable
@@ -92,7 +92,7 @@
                     break;
                 }
             }
-        };
+        }
 
         function cancel() {
             $uibModalInstance.dismiss('cancel');
