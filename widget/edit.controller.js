@@ -2,11 +2,11 @@
 (function () {
     angular
         .module('cybersponse')
-        .controller('happinessQuotient100EditCtrl', happinessQuotient100EditCtrl);
+        .controller('editHappinessQuotient100Ctrl', editHappinessQuotient100Ctrl);
 
-    happinessQuotient100EditCtrl.$inject = ['$scope', '$uibModalInstance', 'config', 'appModulesService', 'Entity', '$state', 'FormEntityService'];
+    editHappinessQuotient100Ctrl.$inject = ['$scope', '$uibModalInstance', 'config', 'appModulesService', 'Entity', '$state', 'FormEntityService'];
 
-    function happinessQuotient100EditCtrl($scope, $uibModalInstance, config, appModulesService, Entity, $state, FormEntityService) {
+    function editHappinessQuotient100Ctrl($scope, $uibModalInstance, config, appModulesService, Entity, $state, FormEntityService) {
         
         $scope.cancel = cancel;
         $scope.save = save;
@@ -22,7 +22,6 @@
         }, config);
 
         function init() {
-          console.log("Edit Page: ", $scope.page);
             // Loads modules present in system
             appModulesService.load(true).then(function (modules) {
                 if ($scope.page !== 'dashboard' && $scope.page !== 'reporting') {
@@ -77,7 +76,7 @@
                     $scope.config.fields = entity.getFormFields();
                 });
             }
-        };
+        }
 
         function setMinMaxForIntegerField() {
             // Iterates over inputFields variable
@@ -92,7 +91,7 @@
                     break;
                 }
             }
-        };
+        }
 
         function cancel() {
             $uibModalInstance.dismiss('cancel');
