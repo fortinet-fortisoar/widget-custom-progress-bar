@@ -4,9 +4,9 @@
         .module('cybersponse')
         .controller('happinessQuotient100Ctrl', happinessQuotient100Ctrl);
 
-    happinessQuotient100Ctrl.$inject = ['$scope', 'config', 'FormEntityService', '$state', 'PagedCollection', '$rootScope'];
+    happinessQuotient100Ctrl.$inject = ['$scope', 'config', 'FormEntityService', '$state', 'PagedCollection', '$rootScope', '$timeout'];
 
-    function happinessQuotient100Ctrl($scope, config, FormEntityService, $state, PagedCollection, $rootScope) {
+    function happinessQuotient100Ctrl($scope, config, FormEntityService, $state, PagedCollection, $rootScope, $timeout) {
 
         $scope.progress = 0;
         var bubblesCount = 5;
@@ -45,8 +45,10 @@
             if ($scope.progress === null && typeof ($scope.progress) !== undefined) {
                 $scope.progress = 0;
             }
-            fillMug();
-        };
+            $timeout(function() {
+                fillMug()
+            }, 100);
+        }
 
         // This code handles data to be calculated for dashboard
         function loadDashboardOrReportingData() {
@@ -89,10 +91,9 @@
             }, angular.noop).finally(function () {
                 $scope.processing = false;
             });
-        };
+        }
 
         function init() {
-            console.log("Page : ", $scope.page);
             for (let j = 1; j <= 4; j++) {
                 let y = {
                     'classDetail': 'foam top-glass-foam-' + j + ' foam-' + $scope.currentTheme

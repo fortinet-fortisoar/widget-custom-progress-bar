@@ -7,7 +7,7 @@
     "metadata": {
         "snapshots": [
             "https://repo.fortisoar.fortinet.com/fsr-widgets/happinessQuotient-1.0.0/images/happiness-quotient-dashboard-edit.png",
-            "https://repo.fortisoar.fortinet.com/fsr-widgets/happinessQuotient-1.0.0/images/happiness-qutient-viewpanel-edit.png",
+            "https://repo.fortisoar.fortinet.com/fsr-widgets/happinessQuotient-1.0.0/images/happiness-quotient-viewpanel-edit.png",
             "https://repo.fortisoar.fortinet.com/fsr-widgets/happinessQuotient-1.0.0/images/happiness-quotient-on-dashboard.png"
         ],
         "description": "Displays the progress percentage metric in a visual engaging way.",
