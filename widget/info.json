@@ -10,7 +10,7 @@
             "https://repo.fortisoar.fortinet.com/fsr-widgets/happinessQuotient-1.0.0/images/happiness-quotient-viewpanel-edit.png",
             "https://repo.fortisoar.fortinet.com/fsr-widgets/happinessQuotient-1.0.0/images/happiness-quotient-on-dashboard.png"
         ],
-        "description": "Displays the progress percentage metric in a visual engaging way.",
+        "description": "A widget that lets you represent percentage statistics as an animated, filled mug, symbolizing the happiness quotient associated with accomplishing tasks. For instance, the widget showing percentage of resolved incidents would present the mug as filled upto the brim and lots of bubbles oozing out of the mug if there are no open incidents.",
         "pages": [
             "Dashboard",
             "View Panel",

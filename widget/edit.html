@@ -39,7 +39,7 @@
             <label for="hqInputResource" class="control-label">Input Field<span class="text-danger">*</span></label>
             <select id="hqInputResource" name="inputResource" class="form-control"
                 data-ng-options="inputField.name as inputField.title for inputField in config.inputFields | orderBy : 'title'"
-                data-ng-model="config.selectInput" data-ng-change="setMinMaxOfIntegerField()" required>
+                data-ng-model="config.selectInput" data-ng-change="setMinMaxForIntegerField()" required>
                 <option value="">Select an option</option>
             </select>
             <div data-cs-messages="editHappinessQuotientForm.inputField"></div>
