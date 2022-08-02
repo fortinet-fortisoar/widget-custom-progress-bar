@@ -10,6 +10,7 @@
 
         $scope.progress = 0;
         var bubblesCount = 5;
+        var subscriptions = [];
         $scope.bubbles = [];
         $scope.foams = [];
         $scope.currentTheme = $rootScope.theme.id;
@@ -17,6 +18,34 @@
         $scope.loadViewData = loadViewData;
         $scope.loadDashboardOrReportingData = loadDashboardOrReportingData;
         $scope.fillMug = fillMug;
+
+        // Used to change values dynamically
+        $scope.$on('websocket:reconnect', function () {
+            initWebsocket(true);
+        });
+
+        function initWebsocket(webSocket) {
+            if (webSocket) {
+                websocketService.subscribe(config.module, function (data) {
+                    loadViewData();
+                }).then(function (data) {
+                    subscriptions.push(data);
+                });
+            }
+        }
+
+        $scope.$on('$destroy', function () {
+            if (subscriptions) {
+                // Unsubscribe
+                unsubscribeWebSockets();
+            }
+        });
+
+        function unsubscribeWebSockets() {
+            angular.forEach(subscriptions, function (subscription) {
+                websocketService.unsubscribe(subscription);
+            });
+        }
 
         // This code handles data to be calculated for view panel
         function loadViewData() {
@@ -45,7 +74,7 @@
             if ($scope.progress === null && typeof ($scope.progress) !== undefined) {
                 $scope.progress = 0;
             }
-            $timeout(function() {
+            $timeout(function () {
                 fillMug()
             }, 100);
         }
@@ -108,9 +137,10 @@
             else {
                 $scope.loadDashboardOrReportingData();
             }
-        };
+            initWebsocket(true);
+        }
         init();
-        
+
         // Handling all mug filling related situations
         function fillMug() {
             // Get class juice based on particular id
@@ -139,6 +169,14 @@
                         $scope.bubbles.push(x);
                     }
                 }
+            }
+            if ($scope.progress >= 100) {
+                $timeout(function () {
+                    $scope.progress1 = 100;
+                }, 450);
+            }
+            else {
+                $scope.progress1 = 0;
             }
         }
     }
