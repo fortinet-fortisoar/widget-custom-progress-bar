@@ -26,13 +26,13 @@
                 </div>
                 <!-- Foam with animation for juice -->
                 <div data-ng-repeat="foam in foams" class="{{ foam.classDetail }}"
-                    data-ng-class="{'display-none' : progress1 !== 100}">
+                    data-ng-class="{'display-none' : showFoamProgressValue !== 100}">
                 </div>
                 <div class="foam side-glass-foam-1 foam-{{ currentTheme }}"
-                    data-ng-class="{'display-none' : progress1 !== 100}">
+                    data-ng-class="{'display-none' : showFoamProgressValue !== 100}">
                 </div>
                 <div class="foam side-glass-foam-2 foam-{{ currentTheme }}"
-                    data-ng-class="{'display-none' : progress1 !== 100}">
+                    data-ng-class="{'display-none' : showFoamProgressValue !== 100}">
                 </div>
             </div>
             <div class="happiness-error-message"

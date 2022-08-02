@@ -172,11 +172,11 @@
             }
             if ($scope.progress >= 100) {
                 $timeout(function () {
-                    $scope.progress1 = 100;
+                    $scope.showFoamProgressValue = 100;
                 }, 450);
             }
             else {
-                $scope.progress1 = 0;
+                $scope.showFoamProgressValue = 0;
             }
         }
     }
