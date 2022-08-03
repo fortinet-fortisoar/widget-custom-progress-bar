@@ -4,9 +4,9 @@
         .module('cybersponse')
         .controller('happinessQuotient100Ctrl', happinessQuotient100Ctrl);
 
-    happinessQuotient100Ctrl.$inject = ['$scope', 'config', 'FormEntityService', '$state', 'PagedCollection', '$rootScope', '$timeout'];
+    happinessQuotient100Ctrl.$inject = ['$scope', 'config', 'FormEntityService', '$state', 'PagedCollection', '$rootScope', '$timeout', 'websocketService'];
 
-    function happinessQuotient100Ctrl($scope, config, FormEntityService, $state, PagedCollection, $rootScope, $timeout) {
+    function happinessQuotient100Ctrl($scope, config, FormEntityService, $state, PagedCollection, $rootScope, $timeout, websocketService) {
 
         $scope.progress = 0;
         var bubblesCount = 5;
@@ -55,7 +55,7 @@
                 fieldValue = FormEntityService.get().fields[config.selectInput].value;
             }
             // If field value is null change it to 0
-            if (fieldValue == null) {
+            if (fieldValue === null) {
                 fieldValue = 0;
             }
             // If value of form field is less or equal than min provided by user set it 0
@@ -75,7 +75,7 @@
                 $scope.progress = 0;
             }
             $timeout(function () {
-                fillMug()
+                fillMug();
             }, 100);
         }
 
@@ -126,7 +126,7 @@
             for (let j = 1; j <= 4; j++) {
                 let y = {
                     'classDetail': 'foam top-glass-foam-' + j + ' foam-' + $scope.currentTheme
-                }
+                };
                 $scope.foams.push(y);
             }
             // Sets random id for class juice to fill it separately
@@ -144,7 +144,7 @@
         // Handling all mug filling related situations
         function fillMug() {
             // Get class juice based on particular id
-            var changeJuiceLevel = angular.element(document.querySelector("#" + $scope.juiceId));
+            var changeJuiceLevel = angular.element(document.getElementById($scope.juiceId));
             if ($scope.progress === 0) {
                 changeJuiceLevel.css({ 'background': 'transparent' });
             }
