@@ -16,7 +16,7 @@
             "View Panel",
             "Reports"
         ],
-        "certified": "Yes",
+        "certified": "No",
         "publisher": "Fortinet",
         "compatibility": [
             "7.2.1"
