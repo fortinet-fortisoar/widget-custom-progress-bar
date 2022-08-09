@@ -10,6 +10,7 @@
             "https://repo.fortisoar.fortinet.com/fsr-widgets/happinessQuotient-1.0.0/images/happiness-quotient-viewpanel-edit.png",
             "https://repo.fortisoar.fortinet.com/fsr-widgets/happinessQuotient-1.0.0/images/happiness-quotient-on-dashboard.png"
         ],
+        "help_online": "https://github.com/fortinet-fortisoar/widget-happiness-quotient/blob/release/1.0.0/README.md",
         "description": "A widget that lets you represent percentage statistics as an animated, filled mug, symbolizing the happiness quotient associated with accomplishing tasks. For instance, the widget showing percentage of resolved incidents would present the mug as filled upto the brim and lots of bubbles oozing out of the mug if there are no open incidents.",
         "pages": [
             "Dashboard",
