@@ -1,7 +1,7 @@
 {
     "name": "happinessQuotient",
     "title": "Happiness Quotient",
-    "subTitle": "Progress Status",
+    "subTitle": "Displays the progress percentage metric in a visual engaging way.",
     "version": "1.0.0",
     "published_date": "1658838600",
     "metadata": {
@@ -18,7 +18,7 @@
             "Reports"
         ],
         "certified": "No",
-        "publisher": "Fortinet",
+        "publisher": "Community",
         "compatibility": [
             "7.2.1"
         ]
