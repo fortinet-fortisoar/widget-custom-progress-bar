@@ -24,9 +24,9 @@ For example, if you want to view the progress made on an incident record based o
 
 **Version**: 1.0.0
 
-**Certified**: Yes
+**Certified**: No
 
-**Publisher**: Fortinet  
+**Publisher**: Community  
 
 **Applicable**: Dashboard, Reports, and View Panel
 
